@@ -1,746 +1,695 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<!-- Mirrored from www.pascalvangemert.nl/ by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 13 Jul 2020 07:46:55 GMT -->
-<!-- Added by HTTrack -->
-<meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
-
 <head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Karan Rana</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;600;800&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<style>
+  :root {
+    --bg: #080c10;
+    --surface: #0d1117;
+    --border: #1e2a3a;
+    --accent: #00e5ff;
+    --accent2: #ff6b35;
+    --text: #e6edf3;
+    --muted: #6e7681;
+    --green: #39d353;
+  }
 
-	<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
-	<meta http-equiv="content-script-type" content="text/javascript" />
-	<meta http-equiv="content-style-type" content="text/css" />
-	<meta http-equiv="content-language" content="nl" />
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Syne', sans-serif; background: var(--bg); color: var(--text); overflow-x: hidden; cursor: none; }
 
-	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  /* Cursor */
+  .cursor { width: 12px; height: 12px; background: var(--accent); border-radius: 50%; position: fixed; pointer-events: none; z-index: 9999; transform: translate(-50%,-50%); transition: width .2s, height .2s; mix-blend-mode: difference; }
+  .cursor-ring { width: 36px; height: 36px; border: 1px solid var(--accent); border-radius: 50%; position: fixed; pointer-events: none; z-index: 9998; transform: translate(-50%,-50%); opacity: .5; transition: width .3s, height .3s, opacity .3s; }
 
-	<meta name="author" content="Karan Rana" />
-	<meta name="description"
-		content="I'm Karan Rana, a Full stack webdeveloper / creative programmer with good knowledge of front-end technics." />
-	<meta name="keywords"
-		content="Karan Rana, Interactive Resume, PHP programmer, Web developer, Startup, Interactive CV, Resume, CV, Whoopaa, HRMatches, Sanitairwinkel, Algorithms, PHP, MySQL, OOP" />
-	<meta name="robots" content="index, follow" />
-	<meta name="revisit-after" content="14 days" />
-	<title>Karan Rana -Full Stack Web Developer</title>
-	<link href="http://fonts.googleapis.com/css?family=Open+Sans:300,600,700" rel="stylesheet" type="text/css" />
-	<link href="view/css/bootstrap.min.css" rel="stylesheet" />
-	<link href="view/style.css" rel="stylesheet" />
-	<link rel="shortcut icon" href="view/images/profile.png" type="image/x-icon" />
-	<link rel="icon" href="view/images/profile.png" type="image/x-icon" />
-    <script src="https://kit.fontawesome.com/95f7e19964.js" crossorigin="anonymous"></script>
-	<script type="text/javascript" id="inspectletjs">
-		window.__insp = window.__insp || [];
-		__insp.push(['wid', 92785244]);
-		(function () {
-			function __ldinsp() {
-				var insp = document.createElement('script');
-				insp.type = 'text/javascript';
-				insp.async = true;
-				insp.id = "inspsync";
-				insp.src = ('https:' == document.location.protocol ? 'https' : 'http') +
-					'://www.inspectlet.com/inspectlet.js';
-				var x = document.getElementsByTagName('script')[0];
-				x.parentNode.insertBefore(insp, x);
-			}
-			if (window.attachEvent) {
-				window.attachEvent('onload', __ldinsp);
-			} else {
-				window.addEventListener('load', __ldinsp, false);
-			}
-		})();
-	</script>
+  /* Grid BG */
+  body::before { content: ''; position: fixed; inset: 0; background-image: linear-gradient(rgba(0,229,255,.03) 1px, transparent 1px), linear-gradient(90deg, rgba(0,229,255,.03) 1px, transparent 1px); background-size: 60px 60px; pointer-events: none; z-index: 0; }
+
+  /* NAV */
+  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 20px 60px; backdrop-filter: blur(12px); background: rgba(8,12,16,.8); border-bottom: 1px solid transparent; transition: border-color .3s; }
+  nav.scrolled { border-color: var(--border); }
+
+  /* Cool brand name */
+  .nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+  .nav-logo-mark { width: 28px; height: 28px; border: 1.5px solid var(--accent); border-radius: 4px; display: flex; align-items: center; justify-content: center; font-family: 'Space Mono', monospace; font-size: 10px; color: var(--accent); font-weight: 700; position: relative; overflow: hidden; }
+  .nav-logo-mark::before { content: ''; position: absolute; inset: 0; background: var(--accent); transform: translateY(100%); transition: transform .3s; }
+  .nav-logo:hover .nav-logo-mark::before { transform: translateY(0); }
+  .nav-logo:hover .nav-logo-mark span { color: var(--bg); }
+  .nav-logo-mark span { position: relative; z-index: 1; transition: color .3s; }
+  .nav-logo-text { font-family: 'Space Mono', monospace; font-size: 13px; color: var(--text); letter-spacing: .05em; }
+  .nav-logo-text em { color: var(--accent); font-style: normal; }
+
+  .nav-links { display: flex; gap: 36px; list-style: none; }
+  .nav-links a { font-size: 11px; color: var(--muted); text-decoration: none; font-family: 'Space Mono', monospace; letter-spacing: .1em; text-transform: uppercase; transition: color .2s; position: relative; }
+  .nav-links a::after { content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 1px; background: var(--accent); transition: width .3s; }
+  .nav-links a:hover { color: var(--accent); }
+  .nav-links a:hover::after { width: 100%; }
+
+  /* HERO */
+  #hero { min-height: 100vh; display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 60px; padding: 120px 60px 60px; position: relative; z-index: 1; }
+
+  .hero-eyebrow { display: inline-flex; align-items: center; gap: 8px; font-family: 'Space Mono', monospace; font-size: 11px; color: var(--accent); letter-spacing: .15em; text-transform: uppercase; margin-bottom: 28px; padding: 6px 14px; border: 1px solid rgba(0,229,255,.3); border-radius: 2px; background: rgba(0,229,255,.05); animation: fadeUp .6s ease both; }
+  .hero-eyebrow::before { content: ''; width: 6px; height: 6px; background: var(--accent); border-radius: 50%; animation: blobpulse 2s infinite; }
+  @keyframes blobpulse { 0%,100% { opacity:1;transform:scale(1); } 50% { opacity:.4;transform:scale(.8); } }
+
+  .hero-name { font-size: clamp(52px,7vw,100px); font-weight: 800; line-height: .95; letter-spacing: -.03em; margin-bottom: 6px; animation: fadeUp .6s .1s ease both; }
+  .hero-name span { display: block; background: linear-gradient(135deg,#fff 0%,var(--accent) 55%,var(--accent2) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+
+  /* BYTEFORGE branded tagline */
+  .hero-brand { font-family: 'Space Mono', monospace; font-size: 13px; color: var(--muted); margin-bottom: 28px; animation: fadeUp .6s .15s ease both; letter-spacing: .1em; }
+  .hero-brand strong { color: var(--accent2); letter-spacing: .15em; font-size: 15px; }
+
+  .hero-role { font-family: 'Space Mono', monospace; font-size: 14px; color: var(--muted); margin-bottom: 32px; animation: fadeUp .6s .2s ease both; }
+  .hero-role em { color: var(--accent2); font-style: normal; }
+
+  .hero-bio { max-width: 560px; font-size: 16px; line-height: 1.8; color: rgba(230,237,243,.75); margin-bottom: 48px; animation: fadeUp .6s .3s ease both; }
+
+  .hero-ctas { display: flex; gap: 16px; flex-wrap: wrap; animation: fadeUp .6s .4s ease both; }
+
+  .btn-primary { padding: 14px 32px; background: var(--accent); color: var(--bg); font-family: 'Space Mono', monospace; font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; text-decoration: none; border: none; border-radius: 3px; cursor: none; position: relative; overflow: hidden; transition: transform .2s, box-shadow .2s; }
+  .btn-primary::after { content: ''; position: absolute; inset: 0; background: rgba(255,255,255,.2); transform: translateX(-100%); transition: transform .3s; }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(0,229,255,.4); }
+  .btn-primary:hover::after { transform: translateX(0); }
+
+  .btn-ghost { padding: 14px 32px; background: transparent; color: var(--text); font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: .1em; text-transform: uppercase; text-decoration: none; border: 1px solid var(--border); border-radius: 3px; cursor: none; transition: border-color .2s, color .2s, transform .2s; }
+  .btn-ghost:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
+
+  /* TERMINAL */
+  .hero-terminal { width: 400px; background: var(--surface); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; box-shadow: 0 40px 100px rgba(0,0,0,.7), 0 0 60px rgba(0,229,255,.06); animation: fadeLeft .8s .5s ease both; flex-shrink: 0; }
+  .terminal-bar { display: flex; align-items: center; gap: 8px; padding: 12px 16px; background: rgba(255,255,255,.03); border-bottom: 1px solid var(--border); }
+  .terminal-dot { width: 10px; height: 10px; border-radius: 50%; }
+  .terminal-dot.r { background: #ff5f57; } .terminal-dot.y { background: #ffbd2e; } .terminal-dot.g { background: #28ca42; }
+  .terminal-title { font-family: 'Space Mono', monospace; font-size: 11px; color: var(--muted); margin-left: auto; }
+  .terminal-body { padding: 20px; font-family: 'Space Mono', monospace; font-size: 12px; line-height: 1.8; min-height: 200px; }
+  .t-prompt { color: var(--green); } .t-output { color: var(--muted); } .t-hi { color: var(--accent); } .t-warn { color: var(--accent2); }
+  .t-cursor { display: inline-block; width: 8px; height: 14px; background: var(--accent); vertical-align: middle; animation: blink 1s infinite; }
+  @keyframes blink { 0%,100% { opacity:1; } 50% { opacity:0; } }
+
+  /* STATS */
+  .stats-bar { position: relative; z-index: 1; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 32px 60px; display: grid; grid-template-columns: repeat(4,1fr); background: linear-gradient(to right, rgba(0,229,255,.03), transparent); }
+  .stat { text-align: center; padding: 16px; border-right: 1px solid var(--border); }
+  .stat:last-child { border-right: none; }
+  .stat-num { font-size: 42px; font-weight: 800; background: linear-gradient(135deg,var(--accent),var(--accent2)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; line-height: 1; margin-bottom: 6px; }
+  .stat-label { font-family: 'Space Mono', monospace; font-size: 11px; color: var(--muted); letter-spacing: .1em; text-transform: uppercase; }
+
+  /* SECTIONS */
+  section { position: relative; z-index: 1; padding: 100px 60px; }
+  .section-tag { font-family: 'Space Mono', monospace; font-size: 11px; color: var(--accent); letter-spacing: .2em; text-transform: uppercase; margin-bottom: 12px; display: flex; align-items: center; gap: 12px; }
+  .section-tag::after { content: ''; flex: 1; max-width: 60px; height: 1px; background: var(--accent); }
+  .section-title { font-size: clamp(32px,4vw,52px); font-weight: 800; letter-spacing: -.02em; margin-bottom: 60px; line-height: 1.1; }
+
+  /* SKILLS */
+  #skills { background: linear-gradient(to bottom, transparent, rgba(0,229,255,.02), transparent); }
+  .skills-grid { display: grid; grid-template-columns: repeat(auto-fill,minmax(280px,1fr)); gap: 1px; background: var(--border); border: 1px solid var(--border); }
+  .skill-card { background: var(--surface); padding: 36px 32px; position: relative; overflow: hidden; transition: background .3s; }
+  .skill-card::before { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg,rgba(0,229,255,.06),transparent); opacity: 0; transition: opacity .3s; }
+  .skill-card:hover { background: #0f1923; } .skill-card:hover::before { opacity: 1; }
+  .skill-icon { font-size: 28px; margin-bottom: 16px; } .skill-name { font-size: 18px; font-weight: 600; margin-bottom: 8px; } .skill-desc { font-size: 13px; color: var(--muted); line-height: 1.6; margin-bottom: 20px; }
+  .skill-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+  .skill-tag { font-family: 'Space Mono', monospace; font-size: 10px; color: var(--accent); padding: 3px 8px; border: 1px solid rgba(0,229,255,.25); border-radius: 2px; background: rgba(0,229,255,.05); letter-spacing: .05em; }
+
+  /* PROJECTS */
+  .projects-grid { display: grid; grid-template-columns: repeat(auto-fill,minmax(340px,1fr)); gap: 24px; }
+  .project-card { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 32px; position: relative; overflow: hidden; transition: transform .3s, border-color .3s, box-shadow .3s; }
+  .project-card::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg,var(--accent),var(--accent2)); transform: scaleX(0); transform-origin: left; transition: transform .4s ease; }
+  .project-card:hover { transform: translateY(-4px); border-color: rgba(0,229,255,.3); box-shadow: 0 20px 60px rgba(0,0,0,.5); }
+  .project-card:hover::after { transform: scaleX(1); }
+  .project-header { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 16px; }
+  .project-icon { font-size: 24px; }
+  .project-links { display: flex; gap: 12px; }
+  .project-link { font-family: 'Space Mono', monospace; font-size: 11px; color: var(--muted); text-decoration: none; letter-spacing: .05em; transition: color .2s; }
+  .project-link:hover { color: var(--accent); }
+  .project-name { font-size: 20px; font-weight: 700; margin-bottom: 10px; } .project-desc { font-size: 14px; color: var(--muted); line-height: 1.65; margin-bottom: 20px; }
+  .project-tech { display: flex; flex-wrap: wrap; gap: 8px; }
+  .tech-pill { font-family: 'Space Mono', monospace; font-size: 10px; color: var(--accent2); padding: 3px 8px; background: rgba(255,107,53,.1); border: 1px solid rgba(255,107,53,.25); border-radius: 2px; }
+  .project-stat { margin-top: 20px; padding-top: 20px; border-top: 1px solid var(--border); display: flex; gap: 24px; }
+  .p-stat { font-family: 'Space Mono', monospace; font-size: 12px; color: var(--muted); }
+  .p-stat span { color: var(--green); display: block; font-size: 16px; font-weight: 700; }
+
+  /* EXPERIENCE */
+  .timeline { position: relative; padding-left: 32px; }
+  .timeline::before { content: ''; position: absolute; left: 0; top: 8px; bottom: 0; width: 1px; background: linear-gradient(to bottom, var(--accent), transparent); }
+  .timeline-item { position: relative; margin-bottom: 56px; }
+  .timeline-dot { position: absolute; left: -38px; top: 6px; width: 12px; height: 12px; border-radius: 50%; background: var(--bg); border: 2px solid var(--accent); box-shadow: 0 0 12px rgba(0,229,255,.5); }
+  .tl-period { font-family: 'Space Mono', monospace; font-size: 11px; color: var(--accent); letter-spacing: .1em; text-transform: uppercase; margin-bottom: 6px; }
+  .tl-title { font-size: 22px; font-weight: 700; margin-bottom: 4px; } .tl-company { font-size: 15px; color: var(--accent2); margin-bottom: 4px; }
+  .tl-location { font-family: 'Space Mono', monospace; font-size: 11px; color: var(--muted); margin-bottom: 14px; }
+  .tl-bullets { list-style: none; display: flex; flex-direction: column; gap: 8px; margin-bottom: 16px; }
+  .tl-bullets li { font-size: 14px; color: rgba(230,237,243,.75); line-height: 1.65; padding-left: 18px; position: relative; }
+  .tl-bullets li::before { content: '▸'; position: absolute; left: 0; color: var(--accent); font-size: 12px; top: 2px; }
+  .tl-pills { display: flex; flex-wrap: wrap; gap: 8px; }
+  .tl-pill { font-family: 'Space Mono', monospace; font-size: 10px; color: var(--text); padding: 4px 10px; background: rgba(255,255,255,.05); border: 1px solid var(--border); border-radius: 2px; }
+
+  /* CONTACT */
+  #contact { background: linear-gradient(to bottom, transparent, rgba(0,229,255,.04)); }
+  .contact-wrapper { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
+  .contact-headline { font-size: clamp(28px,4vw,48px); font-weight: 800; line-height: 1.1; letter-spacing: -.02em; margin-bottom: 20px; }
+  .contact-headline em { font-style: normal; background: linear-gradient(135deg,var(--accent),var(--accent2)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+  .contact-subtext { font-size: 15px; color: var(--muted); line-height: 1.7; margin-bottom: 40px; }
+  .avail-badge { display: inline-flex; align-items: center; gap: 8px; padding: 10px 18px; background: rgba(57,211,83,.08); border: 1px solid rgba(57,211,83,.3); border-radius: 4px; margin-bottom: 36px; font-family: 'Space Mono', monospace; font-size: 12px; color: var(--green); letter-spacing: .05em; }
+  .avail-dot { width: 8px; height: 8px; background: var(--green); border-radius: 50%; animation: blobpulse 1.5s infinite; }
+  .contact-info { display: flex; flex-direction: column; gap: 14px; }
+  .contact-item { display: flex; align-items: center; gap: 14px; font-size: 13px; color: var(--muted); font-family: 'Space Mono', monospace; }
+  .contact-item-icon { color: var(--accent); font-size: 15px; min-width: 20px; text-align: center; }
+  .contact-item a { color: var(--muted); text-decoration: none; transition: color .2s; }
+  .contact-item a:hover { color: var(--accent); }
+
+  /* FORM */
+  .contact-form { display: flex; flex-direction: column; gap: 16px; }
+  .form-group { display: flex; flex-direction: column; gap: 6px; }
+  .form-label { font-family: 'Space Mono', monospace; font-size: 11px; color: var(--muted); letter-spacing: .1em; text-transform: uppercase; }
+  .form-input, .form-textarea { background: var(--surface); border: 1px solid var(--border); color: var(--text); font-family: 'Syne', sans-serif; font-size: 15px; padding: 14px 16px; border-radius: 4px; outline: none; resize: none; transition: border-color .2s, box-shadow .2s; }
+  .form-input:focus, .form-textarea:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(0,229,255,.1); }
+  .form-textarea { min-height: 130px; }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+
+  /* ===== SEND BUTTON WITH FULL ANIMATION ===== */
+  .btn-submit {
+    display: flex; align-items: center; justify-content: center; gap: 10px;
+    padding: 16px 32px; background: linear-gradient(135deg, var(--accent), #00b8cc);
+    color: var(--bg); font-family: 'Space Mono', monospace; font-size: 12px; font-weight: 700;
+    letter-spacing: .1em; text-transform: uppercase; border: none; border-radius: 4px;
+    cursor: none; position: relative; overflow: hidden;
+    transition: transform .2s, box-shadow .2s, opacity .2s;
+    min-width: 200px; height: 52px;
+  }
+  .btn-submit:not(:disabled):hover { transform: translateY(-2px); box-shadow: 0 10px 40px rgba(0,229,255,.4); }
+  .btn-submit:disabled { cursor: not-allowed; }
+
+  /* Ripple on click */
+  .btn-submit .ripple {
+    position: absolute; border-radius: 50%;
+    background: rgba(255,255,255,.3);
+    transform: scale(0); animation: ripple-anim .6s linear;
+    pointer-events: none;
+  }
+  @keyframes ripple-anim { to { transform: scale(4); opacity: 0; } }
+
+  /* Button states */
+  .btn-state { position: absolute; display: flex; align-items: center; gap: 8px; transition: opacity .3s, transform .3s; }
+  .btn-state.hidden { opacity: 0; transform: translateY(20px); pointer-events: none; }
+
+  /* Sending spinner */
+  .spinner { width: 16px; height: 16px; border: 2px solid rgba(8,12,16,.4); border-top-color: var(--bg); border-radius: 50%; animation: spin .7s linear infinite; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  /* Progress bar inside button */
+  .btn-progress { position: absolute; bottom: 0; left: 0; height: 3px; background: rgba(8,12,16,.4); width: 0%; transition: width .1s linear; border-radius: 0 0 4px 4px; }
+
+  /* Success state */
+  .btn-submit.success { background: linear-gradient(135deg, var(--green), #2cb84a); pointer-events: none; }
+  .btn-submit.error { background: linear-gradient(135deg, #ff4444, #cc2222); }
+
+  /* Checkmark animation */
+  .checkmark { width: 20px; height: 20px; }
+  .checkmark-circle { stroke: var(--bg); stroke-width: 2; fill: none; stroke-dasharray: 57; stroke-dashoffset: 57; animation: draw-circle .4s ease forwards; }
+  .checkmark-check { stroke: var(--bg); stroke-width: 2.5; fill: none; stroke-dasharray: 25; stroke-dashoffset: 25; animation: draw-check .3s .3s ease forwards; stroke-linecap: round; stroke-linejoin: round; }
+  @keyframes draw-circle { to { stroke-dashoffset: 0; } }
+  @keyframes draw-check { to { stroke-dashoffset: 0; } }
+
+  .form-message { display: none; padding: 14px 18px; border-radius: 4px; font-size: 13px; font-family: 'Space Mono', monospace; align-items: center; gap: 10px; }
+  .form-message.success { display: flex; background: rgba(57,211,83,.08); border: 1px solid rgba(57,211,83,.3); color: var(--green); }
+  .form-message.error { display: flex; background: rgba(255,68,68,.08); border: 1px solid rgba(255,68,68,.3); color: #ff6b6b; }
+
+  /* EmailJS setup notice */
+  .setup-notice { background: rgba(255,107,53,.06); border: 1px solid rgba(255,107,53,.3); border-radius: 6px; padding: 16px 20px; margin-bottom: 20px; font-size: 13px; color: var(--accent2); font-family: 'Space Mono', monospace; line-height: 1.7; }
+  .setup-notice strong { color: var(--accent); display: block; margin-bottom: 6px; font-size: 12px; letter-spacing: .05em; }
+  .setup-notice code { background: rgba(0,229,255,.1); padding: 1px 6px; border-radius: 2px; color: var(--accent); font-size: 11px; }
+
+  /* FOOTER */
+  footer { position: relative; z-index: 1; border-top: 1px solid var(--border); padding: 40px 60px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 20px; }
+  .footer-copy { font-family: 'Space Mono', monospace; font-size: 12px; color: var(--muted); }
+  .footer-brand { font-family: 'Space Mono', monospace; font-size: 12px; color: var(--muted); }
+  .footer-brand span { color: var(--accent); }
+  .footer-socials { display: flex; gap: 20px; }
+  .footer-social { font-family: 'Space Mono', monospace; font-size: 12px; color: var(--muted); text-decoration: none; transition: color .2s; }
+  .footer-social:hover { color: var(--accent); }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp { from { opacity:0; transform:translateY(24px); } to { opacity:1; transform:translateY(0); } }
+  @keyframes fadeLeft { from { opacity:0; transform:translateX(24px); } to { opacity:1; transform:translateX(0); } }
+  .reveal { opacity:0; transform:translateY(30px); transition: opacity .6s ease, transform .6s ease; }
+  .reveal.visible { opacity:1; transform:translateY(0); }
+
+  ::-webkit-scrollbar { width: 4px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+  ::-webkit-scrollbar-thumb:hover { background: var(--accent); }
+
+  @media (max-width: 1100px) { .hero-terminal { display: none; } #hero { grid-template-columns: 1fr; } }
+  @media (max-width: 768px) {
+    nav { padding: 16px 24px; } .nav-links { display: none; }
+    #hero { padding: 100px 24px 60px; } section { padding: 80px 24px; }
+    .stats-bar { padding: 24px; grid-template-columns: repeat(2,1fr); }
+    .contact-wrapper { grid-template-columns: 1fr; gap: 48px; }
+    footer { padding: 32px 24px; } .form-row { grid-template-columns: 1fr; }
+  }
+</style>
 </head>
+<body>
 
-<body data-spy="scroll" data-target="#navbar-example">
-	<div id="top" class="jumbotron" data-src="/view/images/coffee_animation.gif" data-position="center center">
-		<div class="container">
-			<h1>Karan Rana</h1>
-            <h2>Portfolio</h3>
-		</div>
-		<div class="overlay"></div>
-		<a href="#profile" class="scroll-down">
-			<span class="glyphicon glyphicon-chevron-down"></span>
-		</a>
-	</div>
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
 
-	<nav class="navbar navbar-default" id="navbar-example" role="navigation">
-		<!-- Brand and toggle get grouped for better mobile display -->
-		<div class="navbar-header">
-			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
-				<span class="sr-only">Toggle navigation</span>
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-			</button>
-		</div>
-		<div class="collapse navbar-collapse navbar-ex1-collapse">
-			<ul class="nav navbar-nav">
-				<li class="active"><a href="#profile">Profile</a></li>
-				<li><a href="#experiences">Experiences</a></li>
-				<li><a href="#abilities">Abilities</a></li>
-				<li><a href="#contact">Contact</a></li>
-			</ul>
-		</div><!-- /.navbar-collapse -->
-	</nav>
+<!-- NAV -->
+<nav id="navbar">
+  <a class="nav-logo" href="#">
+    <div class="nav-logo-mark"><span>KR</span></div>
+    <!-- <div class="nav-logo-text"><em>Byte</em>Forge</div> -->
+  </a>
+  <ul class="nav-links">
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
 
-	<div class="background-white">
-		<div id="profile" class="container">
-			<h2>Profile</h2>
-			<p class="lead">I&#039m a Creative Full Stack Webdeveloper</p>
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-inner">
+    <div class="hero-eyebrow">SDE-2 · Backend Engineer</div>
+    <h1 class="hero-name"><span>Karan Rana</span></h1>
+    <div class="hero-brand">// <strong>BYTEFORGE</strong> — forging scalable systems, byte by byte</div>
+    <p class="hero-role">Distributed Architecture · <em>Cloud-Native · High-Availability Systems</em></p>
+    <p class="hero-bio">
+      5+ years building the invisible infrastructure that makes products feel magical. I've slashed latency by 35%, cut infra costs by 20%, and kept 10k+ daily users running at 99.9% uptime — without breaking a sweat.
+    </p>
+    <div class="hero-ctas">
+      <a href="#contact" class="btn-primary">Get in Touch →</a>
+      <a href="https://karanrana.xyz" target="_blank" class="btn-ghost">karanrana.xyz ↗</a>
+    </div>
+  </div>
 
-			<hr />
+  <div class="hero-terminal">
+    <div class="terminal-bar">
+      <div class="terminal-dot r"></div>
+      <div class="terminal-dot y"></div>
+      <div class="terminal-dot g"></div>
+      <span class="terminal-title">production ~ zsh</span>
+    </div>
+    <div class="terminal-body">
+      <div><span class="t-prompt">➜ production </span><span id="termLine"></span><span class="t-cursor" id="termCursor"></span></div>
+      <div id="termOutput"></div>
+    </div>
+  </div>
+</section>
 
-			<div class="row">
-				<div class="col-md-4">
-					<h3>About me</h3>
-					<p>I am an allround web developer.I am a programmer with knowledge of
-                        front-end technologies.I love structure and order and I also stand for quality.
-                        I love spending time on fixing little details and optimizing web apps. Also I like
-                        working in a team,you'll learn faster and much more.
-                        As the saying goes: 'Two heads are better than one ;) .'</p>
-				</div>
-				<div class="col-md-4 text-center">
-					<img src="view/images/profile.png" alt="Karan Rana" width="246" height="246" />
-				</div>
-				<div class="col-md-4">
-					<h3>Details</h3>
-					<p>
-						<strong>Name:</strong>
-                        <br>
-                        Karan Rana
-                        <br>
-                        <strong>Age:</strong>
-                        <br>
-                        26 Years
-                        <br>
-                        <strong>Current Location:</strong>
-                        <br>
-                        Surat,Gujarat
-                        <br>
-					 </p>
-				</div>
-			</div>
-		</div>
-	</div>
-	<div id="experiences" class="container">
-        <h2>Experiences</h2>
-        <p class="lead">
-            “Make it work, make it right, make it fast.”
-        </p>
-        <hr>
-        <!-- <div class="alert alert-danger">
-            <strong>Looking for an awesome new challenge somewhere in the neighborhood of Pune as a Creative Full Stack
-                Web Developer. </strong>
-        </div> -->
-        
-        <h3>Careers</h3>
-        <div class="experiences">
-            <div class="experience row">
-                <div class="col-md-4">
-                    <h4>iProgrammer Solution Pvt.Ltd</h4>
-                    <p class="experience-period">
-                        NOV 2021 -
-                        Present </p>
-                </div>
-                <div class="col-md-8">
-                    <p>
-                        <strong>Fulltime - Full Stack Developer</strong>
-                        <span class="hidden-phone">
-                            Working as a Full Stack Devloper on a large webshop  application.
-                            The application is React and Node based as a team we are working in a fully scrum
-                            way. . </span>
-                        <span class="experience-details">
-                            <span class="location">
-                                <span class="glyphicon glyphicon-map-marker"></span>
-                                Pune </span>
-                            <span class="seperator">|</span>
-                            <span class="link">
-                                <span class="glyphicon glyphicon-link"></span>
-                                <a href="https://www.iprogrammer.com/" target="_blank">iProgrammer Solution</a>
-                            </span>
-                        </span>
-                    </p>
-                </div>
-            </div>  
-	      <div class="experience row">
-                <div class="col-md-4">
-                    <h4>ConnectiongDots InfoTech</h4>
-                    <p class="experience-period">
-                        AUG 2020 -
-                        SEP 2021 </p>
-                </div>
-                <div class="col-md-8">
-                    <p>
-                        <strong>Fulltime - Full Stack Developer</strong>
-                        <span class="hidden-phone">
-                            Working as a Full Stack Devloper on a large webshop for Streaming application.
-                            The application is Angular based as a team we are working in a fully scrum
-                            way. . </span>
-                        <span class="experience-details">
-                            <span class="location">
-                                <span class="glyphicon glyphicon-map-marker"></span>
-                                Pune </span>
-                            <span class="seperator">|</span>
-                            <span class="link">
-                                <span class="glyphicon glyphicon-link"></span>
-                                <a href="https://connectingdotsinfotech.com/" target="_blank">ConnectingDots InfoTech</a>
-                            </span>
-                        </span>
-                    </p>
-                </div>
-            </div>
-        </div>
-            <div class="experience row">
-                <div class="col-md-4">
-                    <h4>BBD India PVT LTD</h4>
-                    <p class="experience-period">
-                        DEC 2019 -
-                        JUN 2020 </p>
-                </div>
-                <div class="col-md-8">
-                    <p>
-                        <strong>Fulltime - Full Stack Developer</strong>
-                        <span class="hidden-phone">
-                            Working as a Full Stack Devloper on a large webshop for banking application.
-                            The application is Angular based and spring Boot as a team we are working in a fully scrum
-                            way. . </span>
-                        <span class="experience-details">
-                            <span class="location">
-                                <span class="glyphicon glyphicon-map-marker"></span>
-                                Pune </span>
-                            <span class="seperator">|</span>
-                            <span class="link">
-                                <span class="glyphicon glyphicon-link"></span>
-                                <a href="https://bbdsoftware.com/" target="_blank">BBD India PVT LTD</a>
-                            </span>
-                        </span>
-                    </p>
-                </div>
-            </div>
-            <hr>    
-            <h3>Educations</h3>
-            <div class="experiences">
-                <div class="experience row">
-                    <div class="col-md-4">
-                        <h4>Veer Narmad South Gujarat University</h4>
-                        <p class="experience-period">
-                            June 2018 -
-                            August 2020
-                        </p>
-                    </div>
-                    <div class="col-md-8">
-                        <p>
-                            <strong>Master's of Computer Application</strong>
-                            <span class="hidden-phone">
-                                The education was mainly Web-based programming, but I also learned about SQL, PHP, MVC, UML
-                                and more. During my time in college Here I learned about
-                                gaming -the importance of OOP-, web- and user experience and design.  </span>
-                            <span class="experience-details">
-                                <span class="location">
-                                    <span class="glyphicon glyphicon-map-marker"></span>
-                                    Surat </span>
-                            </span>
-                        </p>
-                    </div>
-                </div>
-                <div class="experience row">
-                    <div class="col-md-4">
-                        <h4>Udhna Citizen Commerce College</h4>
-                        <p class="experience-period">
-                            Aug 2014 -
-                            Feb 2017 </p>
-                    </div>
-                    <div class="col-md-8">
-                        <p>
-                            <strong>Bachelor of Computer Application</strong>
-                            <span class="hidden-phone">
-                                The education was mainly Java-based programming, but I also learned about SQL, PHP, MVC, UML
-                                and more. During my time in college, I specialized in multimedia. Here I learned about
-                                gaming -the importance of OOP-, web- and user experience and design. </span>
-                            <span class="experience-details">
-                                <span class="location">
-                                    <span class="glyphicon glyphicon-map-marker"></span>
-                                    Surat
-                                </span>
-                            </span>
-                        </p>
-                    </div>
-                </div>
-                <!-- <div class="experience row">
-                    <div class="col-md-4">
-                        <h4>R.N Naik Highschool</h4>
-                        <p class="experience-period">
-                            Aug 2001 -
-                            Jun 2014 </p>
-                    </div>
-                    <div class="col-md-8">
-                        <p>
-                            <strong>Highschool</strong>
-                            <span class="hidden-phone">
-                                I graduated highschool, where I enjoyed doing science, math, and accounts. I realized in
-                                my Last year of school that I wanted to do something with websites, and so I started making
-                                small flash/actionscript applications. </span>
-                            <span class="experience-details">
-                                <span class="location">
-                                    <span class="glyphicon glyphicon-map-marker"></span>
-                                    Surat </span>
-                            </span>
-                        </p>
-                    </div>
-                </div> -->
-            </div>
-            
+<!-- STATS -->
+<div class="stats-bar">
+  <div class="stat reveal"><div class="stat-num" data-count="5" data-suffix="+">0</div><div class="stat-label">Years Experience</div></div>
+  <div class="stat reveal"><div class="stat-num" data-count="35" data-suffix="%">0</div><div class="stat-label">Latency Reduced</div></div>
+  <div class="stat reveal"><div class="stat-num" data-count="99" data-suffix=".9%">0</div><div class="stat-label">Uptime SLA</div></div>
+  <div class="stat reveal"><div class="stat-num" data-count="20" data-suffix="%">0</div><div class="stat-label">Infra Cost Saved</div></div>
+</div>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-tag">Expertise</div>
+  <h2 class="section-title">What I Build</h2>
+  <div class="skills-grid">
+    <div class="skill-card reveal">
+      <div class="skill-icon">⚡</div>
+      <div class="skill-name">API Engineering</div>
+      <div class="skill-desc">RESTful APIs and services with versioning, rate limiting, structured error handling, and centralized logging — built to last.</div>
+      <div class="skill-tags"><span class="skill-tag">Node.js</span><span class="skill-tag">Express.js</span><span class="skill-tag">TypeScript</span><span class="skill-tag">Spring Boot</span></div>
+    </div>
+    <div class="skill-card reveal">
+      <div class="skill-icon">🏗️</div>
+      <div class="skill-name">Microservices</div>
+      <div class="skill-desc">Distributed microservices behind AWS API Gateway. High availability, service isolation, and fault tolerance from day one.</div>
+      <div class="skill-tags"><span class="skill-tag">Microservices</span><span class="skill-tag">AWS Lambda</span><span class="skill-tag">API Gateway</span><span class="skill-tag">Serverless</span></div>
+    </div>
+    <div class="skill-card reveal">
+      <div class="skill-icon">🗄️</div>
+      <div class="skill-name">Databases</div>
+      <div class="skill-desc">Schema design, indexing strategies, and Redis caching layers. 35% latency gains through smart query optimization.</div>
+      <div class="skill-tags"><span class="skill-tag">PostgreSQL</span><span class="skill-tag">MongoDB</span><span class="skill-tag">MySQL</span><span class="skill-tag">Redis</span></div>
+    </div>
+    <div class="skill-card reveal">
+      <div class="skill-icon">☁️</div>
+      <div class="skill-name">Cloud & DevOps</div>
+      <div class="skill-desc">AWS cloud-native deployments, Docker/Kubernetes, and CI/CD pipelines. Compressed deploys from 2 hours → 15 minutes.</div>
+      <div class="skill-tags"><span class="skill-tag">AWS</span><span class="skill-tag">Docker</span><span class="skill-tag">Kubernetes</span><span class="skill-tag">CI/CD</span></div>
+    </div>
+    <div class="skill-card reveal">
+      <div class="skill-icon">🔐</div>
+      <div class="skill-name">Security & Auth</div>
+      <div class="skill-desc">Role-based access control, JWT, OAuth2, and secure API design. Built RBAC from scratch for multi-tenant SaaS platforms.</div>
+      <div class="skill-tags"><span class="skill-tag">RBAC</span><span class="skill-tag">JWT</span><span class="skill-tag">OAuth2</span><span class="skill-tag">OOP Patterns</span></div>
+    </div>
+    <div class="skill-card reveal">
+      <div class="skill-icon">📊</div>
+      <div class="skill-name">Observability</div>
+      <div class="skill-desc">CloudWatch logging, monitoring pipelines, unit and integration testing. Issues found before users ever notice.</div>
+      <div class="skill-tags"><span class="skill-tag">CloudWatch</span><span class="skill-tag">Monitoring</span><span class="skill-tag">Unit Testing</span><span class="skill-tag">Agile/Scrum</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="section-tag">Work</div>
+  <h2 class="section-title">Selected Projects</h2>
+  <div class="projects-grid">
+    <div class="project-card reveal">
+      <div class="project-header"><div class="project-icon">🏗️</div><div class="project-links"><a class="project-link" href="https://karanrana.xyz" target="_blank">Details ↗</a></div></div>
+      <div class="project-name">UTEC — UltraTech Platform</div>
+      <div class="project-desc">Microservices-based backend platform using Node.js, MongoDB, and MySQL. Role-based access control, high-availability AWS infrastructure, and automated CI/CD pipelines — built for enterprise scale.</div>
+      <div class="project-tech"><span class="tech-pill">Node.js</span><span class="tech-pill">MongoDB</span><span class="tech-pill">MySQL</span><span class="tech-pill">AWS</span><span class="tech-pill">CI/CD</span></div>
+      <div class="project-stat"><div class="p-stat"><span>RBAC</span>access control</div><div class="p-stat"><span>HA</span>infrastructure</div><div class="p-stat"><span>Auto</span>deployments</div></div>
+    </div>
+    <div class="project-card reveal">
+      <div class="project-header"><div class="project-icon">💊</div><div class="project-links"><a class="project-link" href="https://karanrana.xyz" target="_blank">Details ↗</a></div></div>
+      <div class="project-name">PharmaConnect</div>
+      <div class="project-desc">Distributed pharmacy inventory aggregation platform with geo-query logic and Redis caching. Engineered for high concurrency — reduced order delays by 25% and improved lookup speed under heavy traffic.</div>
+      <div class="project-tech"><span class="tech-pill">Node.js</span><span class="tech-pill">Redis</span><span class="tech-pill">Geo Queries</span><span class="tech-pill">Distributed Systems</span></div>
+      <div class="project-stat"><div class="p-stat"><span>25%</span>less delays</div><div class="p-stat"><span>Redis</span>caching</div><div class="p-stat"><span>HA</span>distributed</div></div>
+    </div>
+    <div class="project-card reveal">
+      <div class="project-header"><div class="project-icon">🎬</div><div class="project-links"><a class="project-link" href="https://karanrana.xyz" target="_blank">Details ↗</a></div></div>
+      <div class="project-name">OTT Media Backend</div>
+      <div class="project-desc">Optimized backend media pipeline for 450+ OTT assets. Third-party API integrations slashed manual workflows by 60%. Targeted backend optimization improved content load speed by 40%.</div>
+      <div class="project-tech"><span class="tech-pill">Node.js</span><span class="tech-pill">REST APIs</span><span class="tech-pill">Media Processing</span><span class="tech-pill">PostgreSQL</span></div>
+      <div class="project-stat"><div class="p-stat"><span>40%</span>faster load</div><div class="p-stat"><span>60%</span>less manual</div><div class="p-stat"><span>450+</span>assets</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="section-tag">Career</div>
+  <h2 class="section-title">Experience</h2>
+  <div class="timeline">
+    <div class="timeline-item reveal">
+      <div class="timeline-dot"></div>
+      <div class="tl-period">Nov 2021 — Present</div>
+      <div class="tl-title">Senior Software Engineer</div>
+      <div class="tl-company">iProgrammer Solution Pvt Ltd</div>
+      <div class="tl-location">📍 Pune, India</div>
+      <ul class="tl-bullets">
+        <li>Designed and owned scalable distributed Node.js microservices architecture behind AWS API Gateway, supporting 10k+ DAU with 99.9% uptime.</li>
+        <li>Built RESTful APIs with API versioning, rate limiting, structured error handling, and centralized CloudWatch logging.</li>
+        <li>Reduced system latency by 35% through indexing redesign, Redis caching layer, and query optimization under concurrent load.</li>
+        <li>Re-architected services using AWS serverless stack, cutting infrastructure costs by 20%.</li>
+        <li>Automated CI/CD pipelines in Agile/Scrum — compressed deployment time from 2 hours to 15 minutes.</li>
+      </ul>
+      <div class="tl-pills"><span class="tl-pill">Node.js</span><span class="tl-pill">TypeScript</span><span class="tl-pill">AWS</span><span class="tl-pill">Redis</span><span class="tl-pill">PostgreSQL</span><span class="tl-pill">Kubernetes</span></div>
+    </div>
+    <div class="timeline-item reveal">
+      <div class="timeline-dot"></div>
+      <div class="tl-period">Aug 2020 — Sep 2021</div>
+      <div class="tl-title">Software Engineer</div>
+      <div class="tl-company">Connecting Dots Infotech</div>
+      <div class="tl-location">📍 Pune, India</div>
+      <ul class="tl-bullets">
+        <li>Developed scalable backend systems and integrated third-party RESTful APIs, reducing manual workflows by 60%.</li>
+        <li>Optimized backend media processing for 450+ OTT assets, improving content load speed by 40%.</li>
+        <li>Led unit and integration testing efforts, reducing production defects by 25%.</li>
+      </ul>
+      <div class="tl-pills"><span class="tl-pill">Node.js</span><span class="tl-pill">MongoDB</span><span class="tl-pill">REST APIs</span><span class="tl-pill">Integration Testing</span></div>
+    </div>
+    <div class="timeline-item reveal">
+      <div class="timeline-dot"></div>
+      <div class="tl-period">Dec 2019 — Jun 2020</div>
+      <div class="tl-title">Software Engineering Intern</div>
+      <div class="tl-company">BBD Pvt Ltd</div>
+      <div class="tl-location">📍 Pune, India</div>
+      <ul class="tl-bullets">
+        <li>Built RESTful APIs in Java/Spring Boot following OOP principles and design patterns, supporting 5k+ daily transactions.</li>
+      </ul>
+      <div class="tl-pills"><span class="tl-pill">Java</span><span class="tl-pill">Spring Boot</span><span class="tl-pill">MySQL</span><span class="tl-pill">OOP</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-tag">Connect</div>
+  <div class="contact-wrapper">
+    <div class="contact-left reveal">
+      <h2 class="contact-headline">Let's forge something <em>remarkable</em> together.</h2>
+      <p class="contact-subtext">Whether it's a complex distributed system, an API architecture challenge, or building a backend from zero to scale — I want to hear about it. Drop a message and let's talk shop.</p>
+      <div class="avail-badge"><div class="avail-dot"></div>Open to new opportunities</div>
+      <div class="contact-info">
+        <div class="contact-item"><span class="contact-item-icon">✉</span><a href="mailto:karanrana5521@gmail.com">karanrana5521@gmail.com</a></div>
+        <div class="contact-item"><span class="contact-item-icon">📞</span><span>+91 82384 86326</span></div>
+        <div class="contact-item"><span class="contact-item-icon">📍</span><span>Pune, India</span></div>
+        <div class="contact-item"><span class="contact-item-icon">🌐</span><a href="https://karanrana.xyz" target="_blank">karanrana.xyz</a></div>
+        <div class="contact-item"><span class="contact-item-icon">🔗</span><a href="https://linkedin.com/in/karanenough" target="_blank">linkedin.com/in/karanenough</a></div>
+        <div class="contact-item"><span class="contact-item-icon">⏱</span><span>Replies within 24 hours</span></div>
+      </div>
     </div>
 
-	<div class="background-white">
-        <div id="abilities" class="container">
-            <h2>Abilities</h2>
-            <p class="lead">
-                "I Turn Coffee Into Code”
-            </p>
-            <hr>
-            <h3>Skills</h3>
-            <div class="row">
-                <div class="col-md-6">
-                    <ul class="no-bullets">
-                        <li>
-                            <span class="ability-title">Node JS</span>
-                            <span class="ability-score">
-                                <span class="glyphicon glyphicon-star filled"></span>
-                                <span class="glyphicon glyphicon-star filled"></span>
-                                <span class="glyphicon glyphicon-star filled"></span>
-                                <span class="glyphicon glyphicon-star filled"></span>
-                                <span class="glyphicon glyphicon-star filled"></span>
-                            </span>
-                        </li>
-                        <li>
-                            <span class="ability-title">AWS</span>
-                            <span class="ability-score">
-                                <span class="glyphicon glyphicon-star filled"></span>
-                                <span class="glyphicon glyphicon-star filled"></span>
-                                <span class="glyphicon glyphicon-star filled"></span>
-                                <span class="glyphicon glyphicon-star filled"></span>
-                                <span class="glyphicon glyphicon-star "></span>
-                            </span>
-                        </li>
-                        <li>
-                            <span class="ability-title">JAVA</span>
-                            <span class="ability-score">
-                                <span class="glyphicon glyphicon-star filled"></span>
-                                <span class="glyphicon glyphicon-star filled"></span>
-                                <span class="glyphicon glyphicon-star filled"></span>
-                                <span class="glyphicon glyphicon-star filled"></span>
-                                <span class="glyphicon glyphicon-star filled"></span>
-                            </span>
-                        </li>
-                        <li>
-                            <span class="ability-title">PHP</span>
-                            <span class="ability-score">
-                                <span class="glyphicon glyphicon-star filled"></span>
-                                <span class="glyphicon glyphicon-star filled"></span>
-                                <span class="glyphicon glyphicon-star filled"></span>
-                                <span class="glyphicon glyphicon-star filled"></span>
-                                <span class="glyphicon glyphicon-star filled"></span>
-                            </span>
-                        </li>
-                        <li>
-                            <span class="ability-title">Java Script</span>
-                            <span class="ability-score">
-                                <span class="glyphicon glyphicon-star filled"></span>
-                                <span class="glyphicon glyphicon-star filled"></span>
-                                <span class="glyphicon glyphicon-star filled"></span>
-                                <span class="glyphicon glyphicon-star filled"></span>
-                                <span class="glyphicon glyphicon-star filled"></span>
-                            </span>
-                        </li>
-                        <li>
-                            <span class="ability-title">MySQL</span>
-                            <span class="ability-score">
-                                <span class="glyphicon glyphicon-star filled"></span>
-                                <span class="glyphicon glyphicon-star filled"></span>
-                                <span class="glyphicon glyphicon-star filled"></span>
-                                <span class="glyphicon glyphicon-star filled"></span>
-                                <span class="glyphicon glyphicon-star filled"></span>
-                            </span>
-                        </li>
-                        <li>
-                            <span class="ability-title">HTML(5)</span>
-                            <span class="ability-score">
-                                <span class="glyphicon glyphicon-star filled"></span>
-                                <span class="glyphicon glyphicon-star filled"></span>
-                                <span class="glyphicon glyphicon-star filled"></span>
-                                <span class="glyphicon glyphicon-star filled"></span>
-                                <span class="glyphicon glyphicon-star filled"></span>
-                            </span>
-                        </li>
-                        <li>
-                            <span class="ability-title">CSS(3)</span>
-                            <span class="ability-score">
-                                <span class="glyphicon glyphicon-star filled"></span>
-                                <span class="glyphicon glyphicon-star filled"></span>
-                                <span class="glyphicon glyphicon-star filled"></span>
-                                <span class="glyphicon glyphicon-star filled"></span>
-                                <span class="glyphicon glyphicon-star filled"></span>
-                            </span>
-                        </li>
-                        <li>
-                            <span class="ability-title">Bootstrap Framework</span>
-                            <span class="ability-score">
-                                <span class="glyphicon glyphicon-star filled"></span>
-                                <span class="glyphicon glyphicon-star filled"></span>
-                                <span class="glyphicon glyphicon-star filled"></span>
-                                <span class="glyphicon glyphicon-star filled"></span>
-                                <span class="glyphicon glyphicon-star filled"></span>
-                            </span>
-                        </li>
-                        
-                        <li>
-                            <span class="ability-title">JQuery</span>
-                            <span class="ability-score">
-                                <span class="glyphicon glyphicon-star filled"></span>
-                                <span class="glyphicon glyphicon-star filled"></span>
-                                <span class="glyphicon glyphicon-star "></span>
-                                <span class="glyphicon glyphicon-star "></span>
-                                <span class="glyphicon glyphicon-star "></span>
-                            </span>
-                        </li>
-                        <li>
-                            <span class="ability-title">JSON</span>
-                            <span class="ability-score">
-                                <span class="glyphicon glyphicon-star filled"></span>
-                                <span class="glyphicon glyphicon-star filled"></span>
-                                <span class="glyphicon glyphicon-star filled"></span>
-                                <span class="glyphicon glyphicon-star filled"></span>
-                                <span class="glyphicon glyphicon-star filled"></span>
-                            </span>
-                        </li>
-                        
-                        <li>
-                            <span class="ability-title">ASP.NET</span>
-                            <span class="ability-score">
-                                <span class="glyphicon glyphicon-star filled"></span>
-                                <span class="glyphicon glyphicon-star filled"></span>
-                                <span class="glyphicon glyphicon-star filled"></span>
-                                <span class="glyphicon glyphicon-star "></span>
-                                <span class="glyphicon glyphicon-star "></span>
-                            </span>
-                        </li>
-                        <li>
-                            <span class="ability-title">Command line Inteface</span>
-                            <span class="ability-score">
-                                <span class="glyphicon glyphicon-star filled"></span>
-                                <span class="glyphicon glyphicon-star filled"></span>
-                                <span class="glyphicon glyphicon-star filled"></span>
-                                <span class="glyphicon glyphicon-star filled"></span>
-                                <span class="glyphicon glyphicon-star "></span>
-                            </span>
-                        </li>
-                        
-                        
-                    </ul>
-                </div>
-                <div class="col-md-6">
-                    <ul class="no-bullets">
-                        <li>
-                            <span class="ability-title">MVC Pattern</span>
-                            <span class="ability-score">
-                                <span class="glyphicon glyphicon-star filled"></span>
-                                <span class="glyphicon glyphicon-star filled"></span>
-                                <span class="glyphicon glyphicon-star filled"></span>
-                                <span class="glyphicon glyphicon-star filled"></span>
-                                <span class="glyphicon glyphicon-star "></span>
-                            </span>
-                        </li>
-                        <li>
-                            <span class="ability-title">Object Orientated Programming</span>
-                            <span class="ability-score">
-                                <span class="glyphicon glyphicon-star filled"></span>
-                                <span class="glyphicon glyphicon-star filled"></span>
-                                <span class="glyphicon glyphicon-star filled"></span>
-                                <span class="glyphicon glyphicon-star filled"></span>
-                                <span class="glyphicon glyphicon-star filled"></span>
-                            </span>
-                        </li>
-                        <li>
-                            <span class="ability-title">Spring Boot</span>
-                            <span class="ability-score">
-                                <span class="glyphicon glyphicon-star filled"></span>
-                                <span class="glyphicon glyphicon-star filled"></span>
-                                <span class="glyphicon glyphicon-star filled"></span>
-                                <span class="glyphicon glyphicon-star filled"></span>
-                                <span class="glyphicon glyphicon-star "></span>
-                            </span>
-                        </li>
-                        
-                        <li>
-                            <span class="ability-title">Wordpress</span>
-                            <span class="ability-score">
-                                <span class="glyphicon glyphicon-star filled"></span>
-                                <span class="glyphicon glyphicon-star filled"></span>
-                                <span class="glyphicon glyphicon-star filled"></span>
-                                <span class="glyphicon glyphicon-star filled"></span>
-                                <span class="glyphicon glyphicon-star "></span>
-                            </span>
-                        </li>
-                        <li>
-                            <span class="ability-title">Angular</span>
-                            <span class="ability-score">
-                                <span class="glyphicon glyphicon-star filled"></span>
-                                <span class="glyphicon glyphicon-star filled"></span>
-                                <span class="glyphicon glyphicon-star filled"></span>
-                                <span class="glyphicon glyphicon-star filled"></span>
-                                <span class="glyphicon glyphicon-star "></span>
-                            </span>
-                        </li>
-                        <li>
-                            <span class="ability-title">MongoDB</span>
-                            <span class="ability-score">
-                                <span class="glyphicon glyphicon-star filled"></span>
-                                <span class="glyphicon glyphicon-star filled"></span>
-                                <span class="glyphicon glyphicon-star filled"></span>
-                                <span class="glyphicon glyphicon-star filled"></span>
-                                <span class="glyphicon glyphicon-star filled"></span>
-                            </span>
-                        </li>
-                        <li>
-                            <span class="ability-title">SASS</span>
-                            <span class="ability-score">
-                                <span class="glyphicon glyphicon-star filled"></span>
-                                <span class="glyphicon glyphicon-star filled"></span>
-                                <span class="glyphicon glyphicon-star filled"></span>
-                                <span class="glyphicon glyphicon-star filled"></span>
-                                <span class="glyphicon glyphicon-star "></span>
-                            </span>
-                        </li>
-                        <li>
-                            <span class="ability-title">Scrum</span>
-                            <span class="ability-score">
-                                <span class="glyphicon glyphicon-star filled"></span>
-                                <span class="glyphicon glyphicon-star filled"></span>
-                                <span class="glyphicon glyphicon-star filled"></span>
-                                <span class="glyphicon glyphicon-star filled"></span>
-                                <span class="glyphicon glyphicon-star "></span>
-                            </span>
-                        </li>
-                        <li>
-                            <span class="ability-title">UML</span>
-                            <span class="ability-score">
-                                <span class="glyphicon glyphicon-star filled"></span>
-                                <span class="glyphicon glyphicon-star filled"></span>
-                                <span class="glyphicon glyphicon-star filled"></span>
-                                <span class="glyphicon glyphicon-star filled"></span>
-                                <span class="glyphicon glyphicon-star "></span>
-                            </span>
-                        </li>
-                        
-                        <li>
-                            <span class="ability-title">React JS</span>
-                            <span class="ability-score">
-                                <span class="glyphicon glyphicon-star filled"></span>
-                                <span class="glyphicon glyphicon-star filled"></span>
-                                <span class="glyphicon glyphicon-star filled"></span>
-                                <span class="glyphicon glyphicon-star filled"></span>
-                                <span class="glyphicon glyphicon-star "></span>
-                            </span>
-                        </li>
-                        
-                        <li>
-                            <span class="ability-title">Automation Testing</span>
-                            <span class="ability-score">
-                                <span class="glyphicon glyphicon-star filled"></span>
-                                <span class="glyphicon glyphicon-star filled"></span>
-                                <span class="glyphicon glyphicon-star filled"></span>
-                                <span class="glyphicon glyphicon-star filled"></span>
-                                <span class="glyphicon glyphicon-star "></span>
-                            </span>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            <hr>
-            <h3>Languages</h3>
-            <div class="row">
-                <div class="col-md-6">
-                    <ul class="no-bullets">
-                        <li>
-                            <span class="ability-title">English (Daily use)</span>
-                            <span class="ability-score">
-                                <span class="glyphicon glyphicon-star filled"></span>
-                                <span class="glyphicon glyphicon-star filled"></span>
-                                <span class="glyphicon glyphicon-star filled"></span>
-                                <span class="glyphicon glyphicon-star filled"></span>
-                                <span class="glyphicon glyphicon-star filled"></span>
-                            </span>
-                        </li>
-                        <li>
-                            <span class="ability-title">Hindi (Daily use)</span>
-                            <span class="ability-score">
-                                <span class="glyphicon glyphicon-star filled"></span>
-                                <span class="glyphicon glyphicon-star filled"></span>
-                                <span class="glyphicon glyphicon-star filled"></span>
-                                <span class="glyphicon glyphicon-star filled"></span>
-                                <span class="glyphicon glyphicon-star filled"></span>
-                            </span>
-                        </li>
-                    </ul>
-                </div>
-                <div class="col-md-6">
-                    <ul class="no-bullets">
-                        <li>
-                            <span class="ability-title">Gujarati(Mother tongue)</span>
-                            <span class="ability-score">
-                                <span class="glyphicon glyphicon-star filled"></span>
-                                <span class="glyphicon glyphicon-star filled"></span>
-                                <span class="glyphicon glyphicon-star filled"></span>
-                                <span class="glyphicon glyphicon-star filled"></span>
-                                <span class="glyphicon glyphicon-star filled"></span>
-                            </span>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            <hr>
-            <h3>Tools</h3>
-            <div class="row">
-                <div class="col-md-6">
-                    <ul class="no-bullets">
-                        <li>
-                            <span class="ability-title">Chrome (8 years)</span>
-                            <span class="ability-score">
-                                <span class="glyphicon glyphicon-star filled"></span>
-                                <span class="glyphicon glyphicon-star filled"></span>
-                                <span class="glyphicon glyphicon-star filled"></span>
-                                <span class="glyphicon glyphicon-star filled"></span>
-                                <span class="glyphicon glyphicon-star filled"></span>
-                            </span>
-                        </li>
-                        <li>
-                            <span class="ability-title">MS Office (10+ years)</span>
-                            <span class="ability-score">
-                                <span class="glyphicon glyphicon-star filled"></span>
-                                <span class="glyphicon glyphicon-star filled"></span>
-                                <span class="glyphicon glyphicon-star filled"></span>
-                                <span class="glyphicon glyphicon-star filled"></span>
-                                <span class="glyphicon glyphicon-star filled"></span>
-                            </span>
-                        </li>
-                        <li>
-                            <span class="ability-title">Atlassian / Jira (3 year)</span>
-                            <span class="ability-score">
-                                <span class="glyphicon glyphicon-star filled"></span>
-                                <span class="glyphicon glyphicon-star filled"></span>
-                                <span class="glyphicon glyphicon-star filled"></span>
-                                <span class="glyphicon glyphicon-star filled"></span>
-                                <span class="glyphicon glyphicon-star "></span>
-                            </span>
-                        </li>
-                        <li>
-                            <span class="ability-title">WorkBench (3 years)</span>
-                            <span class="ability-score">
-                                <span class="glyphicon glyphicon-star filled"></span>
-                                <span class="glyphicon glyphicon-star filled"></span>
-                                <span class="glyphicon glyphicon-star filled"></span>
-                                <span class="glyphicon glyphicon-star filled"></span>
-                                <span class="glyphicon glyphicon-star "></span>
-                            </span>
-                        </li>
-                    </ul>
-                </div>
-                <div class="col-md-6">
-                    <ul class="no-bullets">
-                        <li>
-                            <span class="ability-title">Git / Git Flow (3 year)</span>
-                            <span class="ability-score">
-                                <span class="glyphicon glyphicon-star filled"></span>
-                                <span class="glyphicon glyphicon-star filled"></span>
-                                <span class="glyphicon glyphicon-star filled"></span>
-                                <span class="glyphicon glyphicon-star filled"></span>
-                                <span class="glyphicon glyphicon-star "></span>
-                            </span>
-                        </li>
-                        <li>
-                            <span class="ability-title">XAMP/MAMP (3 year)</span>
-                            <span class="ability-score">
-                                <span class="glyphicon glyphicon-star filled"></span>
-                                <span class="glyphicon glyphicon-star filled"></span>
-                                <span class="glyphicon glyphicon-star filled"></span>
-                                <span class="glyphicon glyphicon-star filled"></span>
-                                <span class="glyphicon glyphicon-star "></span>
-                            </span>
-                        </li>
-                        <li>
-                            <span class="ability-title">VSCode (5 years)</span>
-                            <span class="ability-score">
-                                <span class="glyphicon glyphicon-star filled"></span>
-                                <span class="glyphicon glyphicon-star filled"></span>
-                                <span class="glyphicon glyphicon-star filled"></span>
-                                <span class="glyphicon glyphicon-star filled"></span>
-                                <span class="glyphicon glyphicon-star "></span>
-                            </span>
-                        </li>
-                        <li>
-                            <span class="ability-title">PostMan (3 years)</span>
-                            <span class="ability-score">
-                                <span class="glyphicon glyphicon-star filled"></span>
-                                <span class="glyphicon glyphicon-star filled"></span>
-                                <span class="glyphicon glyphicon-star filled"></span>
-                                <span class="glyphicon glyphicon-star filled"></span>
-                                <span class="glyphicon glyphicon-star "></span>
-                            </span>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
+    <div class="contact-right reveal">
 
-	<div class="background-gray">
-		<div id="contact" class="container">
-			<h2>Contact</h2>
-			<p class="lead">
-				“SELECT * FROM WORLD
-				WHERE "SOMEONE"
-				LIKE '%ME%'”<BR>
-				<strong>RESULTS LINK :)</strong>
-			</p>
-			<hr>
-			<div class="row">
-				<div class="col-md-6">
-					<ul class="no-bullets">
-						<li>
-							<a href="https://twitter.com/karan_enough" target="_blank">
-								<span class="fab fa-twitter logoimg"></span>
-								Twitter-Karan Rana </a>
-						</li>
-						<li>
-							<a href='https://www.linkedin.com/in/karanenough/' target="_blank">
-								<span class="fab fa-linkedin logoimg"></span>
-								LinkedIn-Karan Rana</a>
-						</li>
-					</ul>
-				</div>
-				<div class="col-md-6">
-					<ul class="no-bullets">
-						<li>
-							<a href="mailto:karanrana5521@gmail.com">
-								<span class="fas fa-mail-bulk logoimg"></span>
-								<span style="unicode-bidi:bidi-override;">Drop me Mail</span>
-							</a>
-						</li>
-						<li>
-							<a href="https://www.instagram.com/karan_enough/" target="_blank">
-								<span class="fab fa-instagram logoimg"></span>
-								Instagram-@karan_enough
-							</a>
-						</li>
-					</ul>
-				</div>
-			</div>
-			<hr>
-		</div>
-	</div>
-	<script type="text/javascript" src="ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-	<script type="text/javascript" src="view/js/script.js"></script>
-	<script type="text/javascript" src="view/js/bootstrap.min.js"></script>
+      <!-- EmailJS Setup Notice -->
+      <div class="setup-notice" id="setupNotice">
+        <strong>⚙ ONE-TIME SETUP REQUIRED (2 min)</strong>
+        To receive emails: 1) Go to <code>emailjs.com</code> → create free account → 2) Create a service (Gmail) → 3) Create a template with vars <code>{{from_name}}</code> <code>{{from_email}}</code> <code>{{subject}}</code> <code>{{message}}</code> → 4) Replace <code>YOUR_PUBLIC_KEY</code>, <code>YOUR_SERVICE_ID</code>, <code>YOUR_TEMPLATE_ID</code> in this file's script. Done! ✓
+      </div>
+
+      <form class="contact-form" id="contactForm">
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Name</label>
+            <input type="text" class="form-input" placeholder="Jane Smith" required id="inputName">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Your Email</label>
+            <input type="email" class="form-input" placeholder="jane@company.com" required id="inputEmail">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Subject</label>
+          <input type="text" class="form-input" placeholder="Project / Opportunity / Collaboration..." required id="inputSubject">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Message</label>
+          <textarea class="form-textarea" placeholder="Tell me about your backend challenges, tech stack, and what you're looking to build..." required id="inputMessage"></textarea>
+        </div>
+
+        <button type="submit" class="btn-submit" id="submitBtn">
+          <!-- Default state -->
+          <span class="btn-state" id="stateDefault">
+            <span>Send Message</span>
+            <span>→</span>
+          </span>
+          <!-- Sending state -->
+          <span class="btn-state hidden" id="stateSending">
+            <div class="spinner"></div>
+            <span>Sending...</span>
+          </span>
+          <!-- Success state -->
+          <span class="btn-state hidden" id="stateSuccess">
+            <svg class="checkmark" viewBox="0 0 24 24">
+              <circle class="checkmark-circle" cx="12" cy="12" r="9"/>
+              <polyline class="checkmark-check" points="7,12 10.5,15.5 17,8.5"/>
+            </svg>
+            <span>Message Sent!</span>
+          </span>
+          <!-- Error state -->
+          <span class="btn-state hidden" id="stateError">
+            <span>✕</span>
+            <span>Try Again</span>
+          </span>
+          <div class="btn-progress" id="btnProgress"></div>
+        </button>
+
+        <div class="form-message" id="formMessage"></div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-copy">© 2025 Karan Rana · Pune, India</div>
+  <div class="footer-brand">// <span>ByteForge</span> — forging systems at scale</div>
+  <div class="footer-socials">
+    <a href="https://karanrana.xyz" target="_blank" class="footer-social">Website</a>
+    <a href="https://linkedin.com/in/karanenough" target="_blank" class="footer-social">LinkedIn</a>
+    <a href="mailto:karanrana5521@gmail.com" class="footer-social">Email</a>
+  </div>
+</footer>
+
+<script>
+  // ============================================================
+  // EMAILJS CONFIG — Replace these 3 values after EmailJS setup
+  // ============================================================
+  const EMAILJS_PUBLIC_KEY  = 'VJraqZZEIDxvKpH7S';   // e.g. 'abc123xyz'
+  const EMAILJS_SERVICE_ID  = 'connect_me';   // e.g. 'service_xxxxxx'
+  const EMAILJS_TEMPLATE_ID = 'template_ii3g0bn';  // e.g. 'template_xxxxxx'
+  // ============================================================
+
+  // Init EmailJS
+  if (EMAILJS_PUBLIC_KEY !== 'YOUR_PUBLIC_KEY') {
+    emailjs.init(EMAILJS_PUBLIC_KEY);
+    document.getElementById('setupNotice').style.display = 'none';
+  }
+
+  // CURSOR
+  const cursor = document.getElementById('cursor');
+  const ring = document.getElementById('cursorRing');
+  let mx=0, my=0, rx=0, ry=0;
+  document.addEventListener('mousemove', e => { mx=e.clientX; my=e.clientY; cursor.style.left=mx+'px'; cursor.style.top=my+'px'; });
+  (function animRing() { rx+=(mx-rx)*0.12; ry+=(my-ry)*0.12; ring.style.left=rx+'px'; ring.style.top=ry+'px'; requestAnimationFrame(animRing); })();
+  document.querySelectorAll('a,button').forEach(el => {
+    el.addEventListener('mouseenter',()=>{ cursor.style.width='20px'; cursor.style.height='20px'; ring.style.width='54px'; ring.style.height='54px'; });
+    el.addEventListener('mouseleave',()=>{ cursor.style.width='12px'; cursor.style.height='12px'; ring.style.width='36px'; ring.style.height='36px'; });
+  });
+
+  // NAV SCROLL
+  window.addEventListener('scroll',()=>{ document.getElementById('navbar').classList.toggle('scrolled', window.scrollY>50); });
+
+  // REVEAL
+  const io = new IntersectionObserver(entries=>{
+    entries.forEach((e,i)=>{ if(e.isIntersecting) setTimeout(()=>e.target.classList.add('visible'),i*80); });
+  },{threshold:0.1});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+  // COUNT UP
+  const countIO = new IntersectionObserver(entries=>{
+    entries.forEach(entry=>{
+      if(!entry.isIntersecting) return;
+      const el = entry.target;
+      const target = parseInt(el.dataset.count);
+      const suffix = el.dataset.suffix||'+';
+      let cur=0;
+      const step=()=>{ cur=Math.min(cur+Math.ceil(target/55),target); el.textContent=cur+suffix; if(cur<target) requestAnimationFrame(step); };
+      requestAnimationFrame(step);
+      countIO.unobserve(el);
+    });
+  },{threshold:0.5});
+  document.querySelectorAll('[data-count]').forEach(el=>countIO.observe(el));
+
+  // TERMINAL
+  const tlines = [
+    { cmd: 'whoami', output: '<span class="t-hi">karan-rana</span> // sde-2 · byteforge' },
+    { cmd: 'cat stack.json', output: '<span class="t-warn">▸</span> node.js · typescript · java\n<span class="t-warn">▸</span> postgresql · mongodb · redis\n<span class="t-warn">▸</span> aws · docker · kubernetes' },
+    { cmd: 'uptime --sla', output: '<span class="t-hi">99.9%</span> uptime · 10k+ DAU · 35% latency ↓' },
+    { cmd: 'git log --oneline -1', output: '<span class="t-hi">a3f9d12</span> feat: serverless → 20% cost ↓ 🚀' },
+    { cmd: 'echo $STATUS', output: '<span class="t-warn">OPEN_TO_WORK=true</span> — karanrana5521@gmail.com' },
+  ];
+  let tli=0;
+  const termLine=document.getElementById('termLine');
+  const termOutput=document.getElementById('termOutput');
+  const termCursor=document.getElementById('termCursor');
+  function typeLine(){
+    const l=tlines[tli%tlines.length]; let ci=0;
+    termLine.textContent=''; termOutput.innerHTML='';
+    termCursor.style.display='inline-block';
+    const iv=setInterval(()=>{
+      termLine.textContent+=l.cmd[ci++];
+      if(ci>=l.cmd.length){
+        clearInterval(iv); termCursor.style.display='none';
+        setTimeout(()=>{
+          termOutput.innerHTML='<div class="t-output" style="margin-top:4px">'+l.output.replace(/\n/g,'<br>')+'</div>';
+          setTimeout(()=>{ tli++; typeLine(); },2400);
+        },300);
+      }
+    },55);
+  }
+  typeLine();
+
+  // BUTTON STATE HELPERS
+  function showState(id) {
+    ['stateDefault','stateSending','stateSuccess','stateError'].forEach(s=>{
+      const el = document.getElementById(s);
+      if(s===id){ el.classList.remove('hidden'); } else { el.classList.add('hidden'); }
+    });
+  }
+
+  function animateProgress(dur, cb) {
+    const bar = document.getElementById('btnProgress');
+    let start = null;
+    function step(ts){
+      if(!start) start=ts;
+      const pct = Math.min(((ts-start)/dur)*100,95);
+      bar.style.width = pct+'%';
+      if(pct<95) requestAnimationFrame(step);
+      else if(cb) cb();
+    }
+    requestAnimationFrame(step);
+  }
+
+  function finishProgress(success){
+    const bar = document.getElementById('btnProgress');
+    bar.style.transition='width .2s ease';
+    bar.style.width='100%';
+    if(!success) bar.style.background='rgba(255,68,68,.6)';
+    setTimeout(()=>{ bar.style.width='0%'; bar.style.transition='none'; if(!success) bar.style.background=''; }, 800);
+  }
+
+  // RIPPLE
+  document.getElementById('submitBtn').addEventListener('click', function(e){
+    const btn = this;
+    const r = document.createElement('span');
+    const size = Math.max(btn.offsetWidth, btn.offsetHeight);
+    const rect = btn.getBoundingClientRect();
+    r.className='ripple';
+    r.style.cssText=`width:${size}px;height:${size}px;left:${e.clientX-rect.left-size/2}px;top:${e.clientY-rect.top-size/2}px`;
+    btn.appendChild(r);
+    setTimeout(()=>r.remove(),700);
+  });
+
+  // FORM SUBMIT
+  document.getElementById('contactForm').addEventListener('submit', async function(e){
+    e.preventDefault();
+    const btn = document.getElementById('submitBtn');
+    const msgEl = document.getElementById('formMessage');
+    const name    = document.getElementById('inputName').value.trim();
+    const email   = document.getElementById('inputEmail').value.trim();
+    const subject = document.getElementById('inputSubject').value.trim();
+    const message = document.getElementById('inputMessage').value.trim();
+
+    // Start animation
+    btn.disabled = true;
+    showState('stateSending');
+    btn.style.pointerEvents='none';
+    msgEl.className='form-message';
+    animateProgress(2500);
+
+    if (EMAILJS_PUBLIC_KEY === 'YOUR_PUBLIC_KEY') {
+      // Demo mode — simulate send
+      await new Promise(r=>setTimeout(r,2000));
+      finishProgress(true);
+      btn.classList.add('success');
+      showState('stateSuccess');
+      msgEl.className='form-message success';
+      msgEl.textContent='✓ Demo mode — Add your EmailJS keys to send real emails. Form works perfectly!';
+      setTimeout(()=>{ btn.classList.remove('success'); btn.disabled=false; btn.style.pointerEvents=''; showState('stateDefault'); this.reset(); msgEl.className='form-message'; },4000);
+      return;
+    }
+
+    try {
+      await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, {
+        from_name: name,
+        from_email: email,
+        subject: subject,
+        message: message,
+        to_email: 'karanrana5521@gmail.com'
+      });
+      finishProgress(true);
+      btn.classList.add('success');
+      showState('stateSuccess');
+      msgEl.className='form-message success';
+      msgEl.textContent='✓ Message sent! Karan will get back to you within 24 hours.';
+      this.reset();
+      setTimeout(()=>{ btn.classList.remove('success'); btn.disabled=false; btn.style.pointerEvents=''; showState('stateDefault'); },4000);
+    } catch(err) {
+      finishProgress(false);
+      btn.classList.add('error');
+      showState('stateError');
+      msgEl.className='form-message error';
+      msgEl.textContent='✕ Something went wrong. Please email karanrana5521@gmail.com directly.';
+      setTimeout(()=>{ btn.classList.remove('error'); btn.disabled=false; btn.style.pointerEvents=''; showState('stateDefault'); },4000);
+    }
+  });
+</script>
 </body>
 </html>
